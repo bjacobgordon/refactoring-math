@@ -6,3 +6,7 @@ import Testing
         #expect($0.quantityMatchesCardinality)
     }
 }
+
+@Test func symbolsOfDecimalDigits() async throws {
+    
+}
