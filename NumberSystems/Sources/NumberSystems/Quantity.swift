@@ -6,7 +6,8 @@ public struct Quantity: Sendable {
     fileprivate static let standardEmbodyingElement = tallyMark
     private static let             embodimentOfNone = ""
     
-    public static let none = Self(Self.embodimentOfNone)!
+    public static let none     = Self(Self.embodimentOfNone)!
+    public static let singular = Self(String(Self.standardEmbodyingElement))!
     
     fileprivate var embodiment: String
     
@@ -31,7 +32,7 @@ extension Quantity: Comparable {
     }
 }
 
-extension Quantity: Operable {
+extension Quantity: Hyperoperable {
     public mutating func succeed() {
         let newElement = self.embodiment.first ?? Quantity.standardEmbodyingElement
         self.embodiment.append(newElement)
@@ -41,6 +42,28 @@ extension Quantity: Operable {
         guard (self != Quantity.none) else { fatalError("There is no precedent for a lack of quantity") }
         
         self.embodiment.removeLast()
+    }
+    
+    public static func hyperoperate(
+        at givenLevel      : Quantity,
+        by givenOperametrum: Quantity,
+        on givenOperand    : Quantity
+    ) -> Quantity {
+        let effectiveOperametrum = (givenLevel == Quantity.none)
+            ? Quantity.singular
+            : givenOperametrum
+        
+        if (givenLevel == Quantity("")!) {
+            var runningOperatum = givenOperand
+            
+            effectiveOperametrum.embodiment.forEach { _ in
+                runningOperatum.succeed()
+            }
+            
+            return runningOperatum
+        }
+        
+        fatalError("Higher-level operations not yet defined")
     }
 }
 
