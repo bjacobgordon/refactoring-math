@@ -10,3 +10,7 @@ import Testing
 @Test func symbolsOfDecimalDigits() async throws {
     
 }
+
+@Test func englishNamesOfDecimalDigits() async throws {
+    
+}
