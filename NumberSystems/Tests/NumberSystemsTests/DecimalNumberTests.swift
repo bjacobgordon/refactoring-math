@@ -14,3 +14,7 @@ import Testing
 @Test func englishNamesOfDecimalDigits() async throws {
     
 }
+
+@Test func singleDigitDecimalNumbers() async throws {
+    
+}
