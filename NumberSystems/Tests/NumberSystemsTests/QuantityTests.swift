@@ -71,3 +71,16 @@ func successorOfQuantity(_ givenCount: Int) async throws {
     let succeededQuantity = operativeQuantity.successor
     #expect(succeededCount.represents(succeededQuantity))
 }
+
+@Test("Predecessor of quantities", arguments: [
+    1,
+    10,
+    100,
+    1000
+])
+func predecessorOfQuantity(_ givenCount: Int) async throws {
+    let operativeQuantity = givenCount.asQuantity
+    let  precededCount    = givenCount - 1
+    let  precededQuantity = operativeQuantity.predecessor
+    #expect(precededCount.represents(precededQuantity))
+}
