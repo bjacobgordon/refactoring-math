@@ -6,3 +6,15 @@ import Testing
         #expect($0.quantityMatchesCardinality)
     }
 }
+
+@Test func symbolsOfNadalaDigits() async throws {
+    
+}
+
+@Test func universalNamesOfNadalaDigits() async throws {
+    
+}
+
+@Test func singleDigitNadalaNumbers() async throws {
+    
+}
