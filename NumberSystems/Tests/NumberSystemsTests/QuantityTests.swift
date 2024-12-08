@@ -14,3 +14,36 @@ let maybeMixed             = Quantity("|🐄")
     #expect(maybeProprietarySingle == nil)
     #expect(maybeMixed             == nil)
 }
+
+@Test func identitiesOfQuantities() async throws {
+    let none           = maybeNone!
+    let standardSingle = maybeStandardSingle!
+    let standardMany   = maybeStandardMany!
+    
+    let uniqueQuantities = [
+        none,
+        standardSingle,
+        standardMany,
+    ].enumerated()
+    
+    uniqueQuantities.forEach { (outer) in
+        uniqueQuantities.forEach { (inner) in
+            if (outer.offset == inner.offset) {
+                #expect(!(outer.element <  inner.element), "Quantity should not be less than itself."   )
+                #expect(  outer.element == inner.element , "Quantity should be equal to itself."        )
+                #expect(!(outer.element >  inner.element), "Quantity should not be greater than itself.")
+                return
+            }
+            
+            #expect(outer.element != inner.element, "Quantity should not be equal to others.")
+            
+            if (outer.offset < inner.offset) {
+                #expect(outer.element < inner.element, "Quantity should be less than a subsequent neighbor.")
+            }
+            else
+            if (outer.offset > inner.offset) {
+                #expect(outer.element > inner.element, "Quantity should be greater than a preceding neighbor.")
+            }
+        }
+    }
+}
