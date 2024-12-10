@@ -31,6 +31,13 @@ extension Quantity: Comparable {
     }
 }
 
+extension Quantity: Operable {
+    public mutating func succeed() {
+        let newElement = self.embodiment.first ?? Quantity.standardEmbodyingElement
+        self.embodiment.append(newElement)
+    }
+}
+
 extension String {
     fileprivate var hasProprietaryElements: Bool {
         self.contains { $0 != Quantity.standardEmbodyingElement }
