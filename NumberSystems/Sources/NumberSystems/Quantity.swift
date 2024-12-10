@@ -35,6 +35,26 @@ extension String {
     fileprivate var hasProprietaryElements: Bool {
         self.contains { $0 != Quantity.standardEmbodyingElement }
     }
+    
+    fileprivate static func standardEmbodimentOf(_ givenValue: Int) -> String {
+        guard 0 <= givenValue else { fatalError("Cannot initiate Quantity instance from negative value") }
+        
+        return String(
+            repeating: Quantity.standardEmbodyingElement,
+            count: givenValue
+        )
+    }
+}
+
+extension Int {
+    public func represents(_ givenQuantity: Quantity) -> Bool {
+        self == givenQuantity.embodiment.count
+    }
+    
+    public var asQuantity: Quantity {
+        let newEmbodiment = String.standardEmbodimentOf(self)
+        return Quantity(newEmbodiment)!
+    }
 }
 
 extension String {
