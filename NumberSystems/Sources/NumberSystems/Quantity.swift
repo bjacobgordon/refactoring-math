@@ -62,6 +62,16 @@ extension Quantity: Hyperoperable {
             
             return runningOperatum
         }
+        else
+        if (givenLevel == Quantity("|")!) {
+            var runningOperatum = givenOperand
+            
+            effectiveOperametrum.embodiment.forEach { _ in
+                runningOperatum.succeed()
+            }
+            
+            return runningOperatum
+        }
         
         fatalError("Higher-level operations not yet defined")
     }

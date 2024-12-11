@@ -100,3 +100,20 @@ func hyperoperationAtLevel0(_ givenOperametrum: Quantity) async throws {
     #expect(11.represents(eleven))
     #expect(12.represents(twelve))
 }
+
+@Test("Alignment of level 1 hyperoperation with addition", arguments: [
+    (   1, 1),
+    (  10, 2),
+    ( 100, 3),
+    (1000, 4)
+])
+func hyperoperationAtLevel1(_ givenAugend: Int, _ givenAddend: Int) async throws {
+    let firstLevel =  1.asQuantity
+    
+    let operand     = givenAugend.asQuantity
+    let operametrum = givenAddend.asQuantity
+    let operatum    = operand.hyperoperatedUpon(at: firstLevel, by: operametrum)
+    
+    let sum = givenAugend + givenAddend
+    #expect(sum.represents(operatum))
+}
