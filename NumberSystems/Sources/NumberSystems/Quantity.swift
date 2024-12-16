@@ -63,6 +63,22 @@ extension Quantity: Hyperoperable {
         if (givenLevel == Quantity.none) { return givenOperand.succeed() }
         
         // (1 + (1 + (1 + (1 + 2))))
+        // (1 + (1 + (1 + (0 + 3))))
+        // (1 + (1 + (1 + (    3))))
+        // (1 + (1 + (1 +      3 )))
+        // (1 + (1 + (0 +      4 )))
+        // (1 + (1 + (         4 )))
+        // (1 + (1 +           4  ))
+        // (1 + (0 +           5  ))
+        // (1 + (              5  ))
+        // (1 +                5   )
+        // (0 +                6   )
+        // (                   6   )
+        //                     6
+        //  two increase                 by four toGet six
+        // four turns                       two  into  six
+        // four added                    to two  yields six
+        // four hyperoperate atLevel one on two  yields six
         else if givenLevel == Quantity("|")! {
             givenOperametrum.embodiment.forEach { _ in
                 Self.hyperoperateUpon(atLevel: givenLevel.predecessor, by: givenOperand, on: &givenOperand)
