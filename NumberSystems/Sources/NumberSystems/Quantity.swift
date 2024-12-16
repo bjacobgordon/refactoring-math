@@ -61,6 +61,7 @@ extension Quantity: Hyperoperable {
             ? Quantity.singular
             : givenOperametrum
         
+        ///` 2 [0} ≡ {0] 2
         if (givenLevel == Quantity("")!) {
             var runningOperatum = givenOperand
             
@@ -71,6 +72,17 @@ extension Quantity: Hyperoperable {
             return runningOperatum
         }
         else
+        ///` 4 [1} 2
+        ///`       2  [0} [0} [0} [0}
+        ///`           3  [0} [0} [0}
+        ///`               4  [0} [0}
+        ///`                   5  [0}
+        ///`                       6
+        ///`                      {0]  5
+        ///`                      {0] {0]  4
+        ///`                      {0] {0] {0]  3
+        ///`                      {0] {0] {0] {0]  2
+        ///`                                       2 {1] 4
         if (givenLevel == Quantity("|")!) {
             var runningOperatum = givenOperand
             
@@ -81,6 +93,17 @@ extension Quantity: Hyperoperable {
             return runningOperatum
         }
         else
+        ///` 4 [2} 2
+        ///` 0 [1} 2 [1} 2 [1} 2 [1} 2
+        ///`       2 [1} 2 [1} 2 [1} 2
+        ///`             4 [1} 2 [1} 2
+        ///`                   6 [1} 2
+        ///`                         8
+        ///`                         2 {1] 6
+        ///`                         2 {1] 2 {1] 4
+        ///`                         2 {1] 2 {1] 2 {1] 2
+        ///`                         2 {1] 2 {1] 2 {1] 2 {1] 0
+        ///`                                           2 {2] 4
         if (givenLevel == Quantity("||")!) {
             let precedingLevel = givenLevel.predecessor
             var runningOperatum = Self.identity(at: precedingLevel)!
@@ -94,6 +117,17 @@ extension Quantity: Hyperoperable {
             return runningOperatum
         }
         else
+        ///` 4 [3} 2
+        ///` 1 [2} 2 [2} 2 [2} 2 [2} 2
+        ///`       2 [2} 2 [2} 2 [2} 2
+        ///`             4 [2} 2 [2} 2
+        ///`                   8 [2} 2
+        ///`                        16
+        ///`                         2 {2] 8
+        ///`                         2 {2] 2 {2] 4
+        ///`                         2 {2] 2 {2] 2 {2] 2
+        ///`                         2 {2] 2 {2] 2 {2] 2 {2] 1
+        ///`                                           2 {3] 4
         if (givenLevel == Quantity("|||")!) {
             let precedingLevel = givenLevel.predecessor
             var runningOperatum = Self.identity(at: precedingLevel)!
@@ -105,6 +139,17 @@ extension Quantity: Hyperoperable {
             return runningOperatum
         }
         else
+        ///` 4 [4} 2
+        ///` 1 [3} 2 [3} 2 [3} 2 [3} 2
+        ///`       2 [3} 2 [3} 2 [3} 2
+        ///`             4 [3} 2 [3} 2
+        ///`                  16 [3} 2
+        ///`                     65536
+        ///`                         2 {3] 16
+        ///`                         2 {3]  2 {3] 4
+        ///`                         2 {3]  2 {3] 2 {3] 2
+        ///`                         2 {3]  2 {3] 2 {3] 2 {3] 1
+        ///`                                            2 {4] 4
         if (givenLevel == Quantity("||||")!) {
             let precedingLevel = givenLevel.predecessor
             var runningOperatum = Self.identity(at: precedingLevel)!
