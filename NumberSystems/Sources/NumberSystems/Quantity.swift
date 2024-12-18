@@ -44,6 +44,14 @@ extension Quantity: Hyperoperable {
         self.embodiment.removeLast()
     }
     
+    public static func identity(at givenLevel: Quantity) -> Quantity? {
+        switch givenLevel {
+        case Quantity.none    : return nil
+        case Quantity.singular: return Quantity.none
+        default               : return Quantity.singular
+        }
+    }
+    
     public static func hyperoperate(
         at givenLevel      : Quantity,
         by givenOperametrum: Quantity,
@@ -68,6 +76,19 @@ extension Quantity: Hyperoperable {
             
             effectiveOperametrum.embodiment.forEach { _ in
                 runningOperatum.succeed()
+            }
+            
+            return runningOperatum
+        }
+        else
+        if (givenLevel == Quantity("||")!) {
+            let precedingLevel = givenLevel.predecessor
+            var runningOperatum = Self.identity(at: precedingLevel)!
+            
+            effectiveOperametrum.embodiment.forEach { _ in
+                let eachOperand     = runningOperatum
+                let eachOperametrum =   givenOperand
+                runningOperatum     = Self.hyperoperate(at: precedingLevel, by: eachOperametrum, on: eachOperand)
             }
             
             return runningOperatum
