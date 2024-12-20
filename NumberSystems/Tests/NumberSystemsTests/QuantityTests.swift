@@ -151,3 +151,14 @@ func hyperoperationAtLevel3(_ givenBase: Int, _ givenExponent: Int) async throws
     let power = givenBase ** givenExponent
     #expect(power.represents(operatum))
 }
+
+@Test func hyperoperationAtLevel4() async throws {
+    let fourthLevel = 4.asQuantity
+    
+    let operametrum = 4.asQuantity
+    let operand     = 2.asQuantity
+    let operatum    = operand.hyperoperatedUpon(at: fourthLevel, by: operametrum)
+    
+    let tetratum    = (2**2**2**2**1)
+    #expect(tetratum.represents(operatum))
+}
