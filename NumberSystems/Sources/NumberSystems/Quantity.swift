@@ -85,6 +85,23 @@ extension Quantity: Hyperoperable {
             
             return
         }
+        else if
+            (givenLevel == Quantity("||||")!)
+        {
+            let precedingLevel = givenLevel.predecessor
+            var runningOperatum = Self.identity(at: precedingLevel)!
+            
+            givenOperametrum.embodiment.forEach { _ in
+                var eachOperand     =   givenOperand
+                let eachOperametrum = runningOperatum
+                Self.hyperoperateUpon(atLevel: precedingLevel, by: eachOperametrum, on: &eachOperand)
+                runningOperatum = eachOperand
+            }
+            
+            givenOperand = runningOperatum
+            
+            return
+        }
         
         fatalError("Higher-level operations not yet defined")
     }
