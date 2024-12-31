@@ -170,6 +170,7 @@ extension String {
         self.contains { $0 != Quantity.standardEmbodyingElement }
     }
     
+    #warning("convert to instance method on Int")
     fileprivate static func standardEmbodimentOf(_ givenValue: Int) -> String {
         guard 0 <= givenValue else { fatalError("Cannot initiate Quantity instance from negative value") }
         
